@@ -1,0 +1,3 @@
+Adafruit CircuitPython 8.0.0-beta.4 on 2022-10-30; HalloWing M0 Express with samd21g18
+Board ID:hallowing_m0_express
+UID:31A1308C4C31505120204A4A381808FF
