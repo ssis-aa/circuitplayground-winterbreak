@@ -1,6 +1,9 @@
 from adafruit_circuitplayground import cp
 import time
 
+import analogio
+import simpleio
+import board
 
 cp.pixels.brightness = 0.3
 
@@ -17,7 +20,7 @@ VIOLET = (127, 0, 255)
 OFF = (0, 0, 0)
 
 
-PEAK_TEMP = 30
+PEAK_TEMP = 32
 
 COLOR_CYCLE = [RED, ORANGE, YELLOW, LIME, GREEN, TURQUOISE, LIGHT_BLUE, AZURE_BLUE, BLUE, VIOLET]
 
@@ -39,12 +42,12 @@ def color_wheel():
             cp.play_tone(TONE_CYCLE[i], 0.15)
             cp.pixels[i] = OFF
 
-# Microphone, thermometer, light sensor
+# Microphone, thermometer
 
 def temp_sound():
     temp = cp.temperature
     time.sleep(1)
-    if temp >= 32:
+    if temp >= PEAK_TEMP:
         cp.play_tone(260, 3)
 
 
@@ -55,16 +58,31 @@ def ACCEL():
     time.sleep(0.1)
     if x > 3:
         cp.pixels[0:5] = GREEN * 5
+        cp.pixels[5:10] = OFF * 5
     elif x < -3:
         cp.pixels[5:10] = RED * 5
+        cp.pixels[0:5] = OFF * 5
+    elif y > 3:
+        cp.pixels[3:7] = GREEN * 4
     else:
         cp.pixels[0:10] = OFF * 10
 
+
+# light sensor
+def light_level_pixels():
+    print("light:", cp.light)
+    light_level = cp.light
+    if light_level < 10:
+        cp.pixels[0:10] = RED * 10
+    elif light_level > 80:
+        cp.pixels[0:10] = GREEN * 10
 
 while True:
     color_wheel()
     ACCEL()
     temp_sound()
+    light_level_pixels()
+
 
 
 
