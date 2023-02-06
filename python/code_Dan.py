@@ -21,6 +21,71 @@ DONE = 4
 OFF = 5
 
 
+def IDLE_LED():
+    pixels[0] = (0,0,0)
+    pixels[1] = (0,0,0)
+    pixels[2] = (0,0,0)
+    pixels[3] = (0,0,0)
+    pixels[4] = (0,0,0)
+    pixels[5] = (0,0,0)
+    pixels[6] = (0,0,0)
+    pixels[7] = (0,0,0)
+    pixels[8] = (0,0,0)
+    pixels[9] = (0,0,0)
+    
+def PUMPING_LED():
+    pixels[0] = (255,255,255)
+    pixels[1] = (255,255,255)
+    pixels[2] = (255,255,255)
+    pixels[3] = (255,255,255)
+    pixels[4] = (255,255,255)
+    pixels[5] = (255,255,255)
+    pixels[6] = (255,255,255)
+    pixels[7] = (255,255,255)
+    pixels[8] = (255,255,255)
+    pixels[9] = (255,255,255)
+    
+def PAUSED_LED():
+    pixels[0] = (255,0,0)
+    pixels[1] = (255,0,0)
+    pixels[2] = (255,0,0)
+    pixels[3] = (255,0,0)
+    pixels[4] = (255,0,0)
+    pixels[5] = (255,0,0)
+    pixels[6] = (255,0,0)
+    pixels[7] = (255,0,0)
+    pixels[8] = (255,0,0)
+    pixels[9] = (255,0,0)
+    
+def AUTOMATIC_LED():
+    pixels[0] = (0,0,255)
+    pixels[1] = (0,0,255)
+    pixels[2] = (0,0,255)
+    pixels[3] = (0,0,255)
+    pixels[4] = (0,0,255)
+    pixels[5] = (0,0,255)
+    pixels[6] = (0,0,255)
+    pixels[7] = (0,0,255)
+    pixels[8] = (0,0,255)
+    pixels[9] = (0,0,255)
+
+def DONE_LED():
+    pixels[0] = (0,255,0)
+    pixels[1] = (0,255,0)
+    pixels[2] = (0,255,0)
+    pixels[3] = (0,255,0)
+    pixels[4] = (0,255,0)
+    pixels[5] = (0,255,0)
+    pixels[6] = (0,255,0)
+    pixels[7] = (0,255,0)
+    pixels[8] = (0,255,0)
+    pixels[9] = (0,255,0)
+
+def clear_screen():
+    pass
+
+
+
 currentState = IDLE
 
 def Volume(int: volume):
@@ -112,33 +177,31 @@ def reactToState(int: currentState):
     if(currentState == IDLE
         print("IDLE)")
         for j in range(4):
-            pixels[0] = (0,0,0)
-            pixels[1] = (0,0,0)
-            pixels[2] = (0,0,0)
-            pixels[3] = (0,0,0)
-            pixels[4] = (0,0,0)
-            pixels[5] = (0,0,0)
-            pixels[6] = (0,0,0)
-            pixels[7] = (0,0,0)
-            pixels[8] = (0,0,0)
-            pixels[9] = (0,0,0)
+            IDLE_LED()
             time.sleep(0.5)
     if currentState == PUMPING
         print("PUMPING")
         ACTIVATE_PUMP()
-        for j in range(4):
-            pixels[0] = (255,255,255)
-            pixels[1] = (255,255,255)
-            pixels[2] = (255,255,255)
-            pixels[3] = (255,255,255)
-            pixels[4] = (255,255,255)
-            pixels[5] = (255,255,255)
-            pixels[6] = (255,255,255)
-            pixels[7] = (255,255,255)
-            pixels[8] = (255,255,255)
-            pixels[9] = (255,255,255)
+        for k in range(4):
+            PUMPING_LED()
             time.sleep(0.5)
     if currentState == PAUSED
+        print("PAUSED")
+        for l in range(4):
+            PAUSED_LED()
+            time.sleep(0.5)
+    if currentState == AUTOMATIC
+        print("AUTOMATIC MODE ON")
+        for n in range(4):
+            AUTOMATIC_LED()
+            time.sleep(0.5)
+    if currentState == DONE
+        print("DONE")
+        for n in range(4):
+            DONE_LED()
+            time.sleep(0.5) 
+    if currentState == OFF
+        clear_screen()
 
 
 
